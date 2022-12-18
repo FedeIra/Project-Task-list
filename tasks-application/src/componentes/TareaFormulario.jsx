@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import '../hojas-de-estilo/TareaFormulario.css';
-import { useState, useEffect, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid'; /* importamos el paquete uuid para asignar ids únicos a cada tarea que se vaya agregando */
 
 function TareaFormulario(props) {
+  // Use State for Add ToDo:
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
 
   const inputRef = useRef(null);
@@ -17,19 +17,19 @@ function TareaFormulario(props) {
   };
 
   const manejarEnvio = (e) => {
-    e.preventDefault(); /* permite que no se vuelva a cargar toda la aplicación cuando enviamos el formulario */
+    e.preventDefault();
     const tareaNueva = {
-      id: uuidv4() /* Usamos el uuid*/,
+      id: uuidv4(),
       texto: input,
       completada: false,
     };
-    props.onSubmit(
-      tareaNueva
-    ); /* onSubmit porque es un estandar de lo que ocurre cuando se envía el formulario */
+    props.onSubmit(tareaNueva);
     setInput('');
   };
 
+  // Render Component:
   return (
+    // Component for Edit/Update:
     <form onSubmit={manejarEnvio} className="tarea-formulario">
       {props.edit ? (
         <div className="input-contenedor-edit">
@@ -45,6 +45,7 @@ function TareaFormulario(props) {
           <button className="tarea-boton-edit">Update</button>
         </div>
       ) : (
+        // Component for Add ToDo:
         <>
           <input
             className="tarea-input"

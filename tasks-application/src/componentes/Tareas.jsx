@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import '../hojas-de-estilo/Tareas.css';
+import TareaFormulario from './TareaFormulario';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { TiEdit, TiTick } from 'react-icons/ti';
-import TareaFormulario from './TareaFormulario';
-
-//  TODO import draghandle:
-import { MdDragHandle } from 'react-icons/md';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import '../hojas-de-estilo/Tareas.css';
 
 function Tarea({
   id,
@@ -16,11 +12,13 @@ function Tarea({
   eliminarTarea,
   editarTarea,
 }) {
+  // Use State for Edits:
   const [edit, setEdit] = useState({
     id: null,
     value: '',
   });
 
+  // Submit Edits:
   const submitUpdate = (value) => {
     editarTarea(edit.id, value);
     setEdit({
@@ -33,6 +31,7 @@ function Tarea({
     return <TareaFormulario edit={edit} onSubmit={submitUpdate} />;
   }
 
+  // Render Component:
   return (
     <div
       className={

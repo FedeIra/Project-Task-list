@@ -4,3 +4,8 @@
   justify-content: center;
   margin-top: 15px;
 }
+
+.tareas_lista {
+  width: 100%;
+  max-width: 800px;
+}

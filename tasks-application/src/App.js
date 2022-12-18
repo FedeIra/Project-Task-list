@@ -1,5 +1,5 @@
-import './App.css';
 import ListaTareas from './componentes/ListaTareas.jsx';
+import './App.css';
 
 function App() {
   return (

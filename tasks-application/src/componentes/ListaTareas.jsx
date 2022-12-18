@@ -1,44 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TareaFormulario from './TareaFormulario';
-import '../hojas-de-estilo/ListaDeTareas.css';
-import { useState } from 'react';
 import Tarea from './Tareas';
+import '../hojas-de-estilo/ListaDeTareas.css';
 
-//  TODO import draghandle:
+// TODO:
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { MdDragHandle } from 'react-icons/md';
 
 function ListaDeTareas(props) {
-  const [tareas, setTareas] = useState(
-    []
-  ); /* le pasamos un arreglo vacío pq le queremos asignar un array vacío como inicio. Vamos a tener un arreglo de objetos. Se toma cada elemento por medio de map y luego se agrega el componente Tarea*/
+  const [tareas, setTareas] = useState([]);
 
+  /* use state for drag and drop: */
+  const [tareas_lista, setLista] = useState([tareas]);
+
+  // Add Task:
   const agregarTarea = (tarea) => {
     if (tarea.texto.trim()) {
-      /* probamos que la cadena no esté vacía. */
       tarea.texto = tarea.texto.trim();
       const tareasActualizadas = [tarea, ...tareas];
       setTareas(tareasActualizadas);
-      /* clear input: */
-      /* le pasamos una copia del arreglo de tareas y le agregamos la nueva tarea */
     }
   };
 
-  const eliminarTarea = (id) => {
-    const tareasActualizadas = tareas.filter((tarea) => tarea.id !== id);
-    setTareas(tareasActualizadas);
-  };
-
-  const completarTarea = (id) => {
-    const tareasActualizadas = tareas.map((tarea) => {
-      if (tarea.id === id) {
-        tarea.completada = !tarea.completada;
-      }
-      return tarea;
-    });
-    setTareas(tareasActualizadas);
-  };
-
+  // Edit Task:
   const editarTarea = (id, nuevoTexto) => {
     if (nuevoTexto.texto.trim()) {
       const tareasActualizadas = tareas.map((tarea) => {
@@ -51,31 +34,59 @@ function ListaDeTareas(props) {
     }
   };
 
+  // Complete Task:
+  const completarTarea = (id) => {
+    const tareasActualizadas = tareas.map((tarea) => {
+      if (tarea.id === id) {
+        tarea.completada = !tarea.completada;
+      }
+      return tarea;
+    });
+    setTareas(tareasActualizadas);
+  };
+
+  // Remove Task:
+  const eliminarTarea = (id) => {
+    const tareasActualizadas = tareas.filter((tarea) => tarea.id !== id);
+    setTareas(tareasActualizadas);
+  };
+
+  // Move Task:
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+    const items = Array.from(tareas);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setTareas(items);
+  };
+
+  // Render Component:
   return (
-    <>
+    <div>
       <TareaFormulario onSubmit={agregarTarea} />
-      <DragDropContext
-        onDragEnd={(...props) => {
-          console.log(props);
-        }}
-      >
-        <div className="tareas-lista-contenedor">
-          <Droppable droppableId="droppable-1">
-            {(provided, _) => (
-              <div ref={provided.innerRef} {...provided.droppableProps}>
+      <div className="tareas-lista-contenedor">
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="tareas_lista">
+            {(provided) => (
+              <ul
+                className="tareas_lista"
+                style={{ listStyleType: 'none' }}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
                 {tareas.map((tarea, index) => (
                   <Draggable
                     key={tarea.id}
-                    draggableId={'dragabble' + tarea.id}
+                    draggableId={tarea.id}
                     index={index}
                   >
-                    {(provided, _) => (
-                      <div>
+                    {(provided) => (
+                      <li
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
                         <Tarea
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          key={tarea.id}
                           id={tarea.id}
                           texto={tarea.texto}
                           completada={tarea.completada}
@@ -83,17 +94,18 @@ function ListaDeTareas(props) {
                           completarTarea={completarTarea}
                           editarTarea={editarTarea}
                         />
-                      </div>
+                      </li>
                     )}
                   </Draggable>
                 ))}
-              </div>
+                {provided.placeholder}
+              </ul>
             )}
           </Droppable>
-        </div>
-      </DragDropContext>
-    </>
-  ); /* Están vacías porque no necesitamos agregar una etiqueta. Esto se llama fragmentos. */
+        </DragDropContext>
+      </div>
+    </div>
+  );
 }
 
 export default ListaDeTareas;
