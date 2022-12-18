@@ -4,6 +4,10 @@ import '../hojas-de-estilo/ListaDeTareas.css';
 import { useState } from 'react';
 import Tarea from './Tareas';
 
+//  TODO import draghandle:
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { MdDragHandle } from 'react-icons/md';
+
 function ListaDeTareas(props) {
   const [tareas, setTareas] = useState(
     []
@@ -50,20 +54,44 @@ function ListaDeTareas(props) {
   return (
     <>
       <TareaFormulario onSubmit={agregarTarea} />
-      <div className="tareas-lista-contenedor">
-        {tareas.map((tarea) => (
-          <Tarea
-            key={tarea.id}
-            id={tarea.id}
-            texto={tarea.texto}
-            completada={tarea.completada}
-            eliminarTarea={eliminarTarea}
-            completarTarea={completarTarea}
-            editarTarea={editarTarea}
-          />
-        ))}
-        {/* El key es para identificar el elemento en la lista. Por eso le asignamos el id que es único. El id luego se incluye para poder usarlo. */}
-      </div>
+      <DragDropContext
+        onDragEnd={(...props) => {
+          console.log(props);
+        }}
+      >
+        <div className="tareas-lista-contenedor">
+          <Droppable droppableId="droppable-1">
+            {(provided, _) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {tareas.map((tarea, index) => (
+                  <Draggable
+                    key={tarea.id}
+                    draggableId={'dragabble' + tarea.id}
+                    index={index}
+                  >
+                    {(provided, _) => (
+                      <div>
+                        <Tarea
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          key={tarea.id}
+                          id={tarea.id}
+                          texto={tarea.texto}
+                          completada={tarea.completada}
+                          eliminarTarea={eliminarTarea}
+                          completarTarea={completarTarea}
+                          editarTarea={editarTarea}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+              </div>
+            )}
+          </Droppable>
+        </div>
+      </DragDropContext>
     </>
   ); /* Están vacías porque no necesitamos agregar una etiqueta. Esto se llama fragmentos. */
 }

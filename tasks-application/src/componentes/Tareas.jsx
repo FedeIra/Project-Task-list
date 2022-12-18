@@ -4,6 +4,10 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { TiEdit, TiTick } from 'react-icons/ti';
 import TareaFormulario from './TareaFormulario';
 
+//  TODO import draghandle:
+import { MdDragHandle } from 'react-icons/md';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 function Tarea({
   id,
   texto,
