@@ -9,13 +9,53 @@
 
 /* Campo de texto */
 .tarea-input {
-  width: 350px;
+  width: 60%;
   font-size: 18px;
   background-color: white;
   padding: 14px 32px 14px 16px;
-  border-radius: 4px 0 0 4px;
+  border-radius: 0;
   border: 2px solid #00471b;
   outline: none; /* no queremos que tenga borde */
+}
+
+@media (max-width: 490px) {
+  .tarea-input {
+    width: 60%;
+    font-size: 14px;
+    padding: 10px 28px 10px 12px;
+  }
+}
+
+.input-contenedor-edit {
+  width: 100%;
+  min-height: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tarea-input-edit {
+  width: 39.1rem;
+  font-size: 18px;
+  background-color: white;
+  padding: 15px 33px 15px 16px;
+  border-radius: 0;
+  border: 2px solid #0b012e;
+  outline: none; /* no queremos que tenga borde */
+}
+
+@media (max-width: 768px) {
+  .tarea-input-edit {
+    width: 29.5rem;
+  }
+}
+
+@media (max-width: 490px) {
+  .tarea-input-edit {
+    width: 10.7rem;
+    padding: 13px;
+    font-size: 14px;
+  }
 }
 
 /* Botón agregar tarea */
@@ -24,9 +64,39 @@
   font-size: 18px;
   font-family: Roboto, sans-serif;
   border: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0;
   outline: none;
   background: #00471b;
   color: #fff;
   text-transform: capitalize; /* Capitalize te pone en mayúscula la primer letra de cada palabra */
+  border-radius: 0;
+}
+
+/* for cellphone: */
+@media (max-width: 490px) {
+  .tarea-boton {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+.tarea-boton-edit {
+  padding: 17px;
+  font-size: 18px;
+  font-family: Roboto, sans-serif;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: #0b012e;
+  color: #fff;
+  text-transform: capitalize; /* Capitalize te pone en mayúscula la primer letra de cada palabra */
+}
+
+@media (max-width: 490px) {
+  .tarea-boton-edit {
+    padding: 15px;
+    padding-left: 22px;
+    padding-right: 22px;
+    font-size: 14px;
+  }
 }

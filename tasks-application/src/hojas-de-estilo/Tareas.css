@@ -1,5 +1,5 @@
 .tarea-contenedor {
-  width: 500px;
+  width: 100%;
   min-height: 65px;
   background-color: #1b1b32;
   margin: 5px 0;
@@ -7,23 +7,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 7px;
-  border: 1px solid white;
-  cursor: pointer;
+  border-radius: 0;
+  /* border: 1px solid white; */
+  /* cursor: pointer; */
+}
+
+/* for ipad: */
+@media (max-width: 490px) {
+  .tarea-contenedor {
+    font-size: 14px;
+    padding: 4px 11px 4px 16px;
+    min-height: 50px;
+  }
 }
 
 /* Colores: degrade de colores a gris más claro. Selecciona el enesimo hijo que cumple con la condición. */
-.tarea-contenedor:nth-child(3n + 1) {
-  background-color: #1b1b32;
-}
-
-.tarea-contenedor:nth-child(3n + 2) {
-  background-color: #2a2a40;
-}
-
-.tarea-contenedor:nth-child(3n + 3) {
-  background: color #3b3b4f;
-}
 
 /* Texto */
 .tarea-texto {
@@ -35,14 +33,66 @@
   overflow-wrap: anywhere; /* esto permite que si el texto de la tarea es muy largo el texto va a ser cortado y seguir hacia abajo. Por eso asignamos una altura mínima para el contenedor. */
 }
 
+/* for cellphone: */
+@media (max-width: 490px) {
+  .tarea-texto {
+    font-size: 14px;
+  }
+}
+
 /* Icono */
 .tarea-icono {
   width: 25px;
   height: 25px;
   margin: 5px;
+  cursor: pointer;
 }
 
-/*  Tarea completada*/
+.tarea-icono-edit {
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.tarea-icono-edit:hover {
+  color: rgb(225, 122, 4);
+}
+
+.tarea-icono:hover {
+  color: rgb(255, 0, 0);
+}
+
+.tarea-icono-done {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  background-color: white;
+  border-radius: 50%;
+  color: black;
+  cursor: pointer;
+}
+
+.tarea-icono-done:hover {
+  background-color: #015618;
+  color: white;
+}
+
+@media (max-width: 490px) {
+  .tarea-icono {
+    width: 22px;
+    height: 22px;
+  }
+  .tarea-icono-done {
+    width: 22px;
+    height: 22px;
+  }
+  .tarea-icono-edit {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 .tarea-contenedor.completada {
   background-color: #781010;
   text-decoration: line-through;

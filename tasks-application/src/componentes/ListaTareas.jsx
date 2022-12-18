@@ -1,8 +1,8 @@
-import React from "react";
-import TareaFormulario from "./TareaFormulario";
-import "../hojas-de-estilo/ListaDeTareas.css";
-import { useState } from "react";
-import Tarea from "./Tareas";
+import React from 'react';
+import TareaFormulario from './TareaFormulario';
+import '../hojas-de-estilo/ListaDeTareas.css';
+import { useState } from 'react';
+import Tarea from './Tareas';
 
 function ListaDeTareas(props) {
   const [tareas, setTareas] = useState(
@@ -15,6 +15,7 @@ function ListaDeTareas(props) {
       tarea.texto = tarea.texto.trim();
       const tareasActualizadas = [tarea, ...tareas];
       setTareas(tareasActualizadas);
+      /* clear input: */
       /* le pasamos una copia del arreglo de tareas y le agregamos la nueva tarea */
     }
   };
@@ -34,6 +35,18 @@ function ListaDeTareas(props) {
     setTareas(tareasActualizadas);
   };
 
+  const editarTarea = (id, nuevoTexto) => {
+    if (nuevoTexto.texto.trim()) {
+      const tareasActualizadas = tareas.map((tarea) => {
+        if (tarea.id === id) {
+          tarea.texto = nuevoTexto.texto;
+        }
+        return tarea;
+      });
+      setTareas(tareasActualizadas);
+    }
+  };
+
   return (
     <>
       <TareaFormulario onSubmit={agregarTarea} />
@@ -46,6 +59,7 @@ function ListaDeTareas(props) {
             completada={tarea.completada}
             eliminarTarea={eliminarTarea}
             completarTarea={completarTarea}
+            editarTarea={editarTarea}
           />
         ))}
         {/* El key es para identificar el elemento en la lista. Por eso le asignamos el id que es único. El id luego se incluye para poder usarlo. */}

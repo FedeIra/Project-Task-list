@@ -8,7 +8,7 @@ html,
 body {
   color: white;
   background-color: #1b1b32;
-  font-family: Lato, sans-serif;
+  font-family: Roboto, sans-serif;
   margin-top: 40px;
 }
 
@@ -34,6 +34,8 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 .freecodecamp-logo {
@@ -43,10 +45,17 @@ h1 {
 
 /* Lista de Tareas: */
 .tareas-lista-principal {
-  width: 600px;
+  width: 40%;
   min-height: 500px;
   background-color: rgba(220, 215, 215, 0.817);
   padding: 25px;
   margin: 10px;
-  border-radius: 26px;
+  border-radius: 0;
+}
+
+/* for ipad: */
+@media (max-width: 768px) {
+  .tareas-lista-principal {
+    width: 80%;
+  }
 }
