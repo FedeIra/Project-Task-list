@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* define como se va a calcular la caja en base al padding, etc. */
+  box-sizing: border-box;
 }
 
 html,
@@ -38,11 +38,6 @@ h1 {
   font-weight: bold;
 }
 
-.freecodecamp-logo {
-  width: 400px;
-  height: 50px;
-}
-
 /* Lista de Tareas: */
 .tareas-lista-principal {
   width: 40%;
@@ -53,7 +48,6 @@ h1 {
   border-radius: 0;
 }
 
-/* for ipad: */
 @media (max-width: 768px) {
   .tareas-lista-principal {
     width: 80%;

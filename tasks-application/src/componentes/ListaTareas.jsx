@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TareaFormulario from './TareaFormulario';
 import Tarea from './Tareas';
 import '../hojas-de-estilo/ListaDeTareas.css';
@@ -6,6 +6,19 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function ListaDeTareas(props) {
   const [tareas, setTareas] = useState([]);
+
+  useEffect(() => {
+    const tareasGuardadas = JSON.parse(
+      window.localStorage.getItem('My tasks list')
+    );
+    if (tareasGuardadas) {
+      setTareas(tareasGuardadas);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('My tasks list', JSON.stringify(tareas));
+  }, [tareas]);
 
   // Add Task:
   const agregarTarea = (tarea) => {
