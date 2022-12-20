@@ -1,9 +1,11 @@
 import ListaTareas from './componentes/ListaTareas.jsx';
+// import NavBar from './componentes/NavBar.jsx';
 import './App.css';
 
 function App() {
   return (
     <div className="aplicacion-tareas">
+      {/* <NavBar /> */}
       <div className="freecodecamp-logo-contenedor">
         <p>ToDo List</p>
       </div>

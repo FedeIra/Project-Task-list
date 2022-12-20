@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import TareaFormulario from './TareaFormulario';
 import Tarea from './Tareas';
 import '../hojas-de-estilo/ListaDeTareas.css';
-
-// TODO:
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function ListaDeTareas(props) {
   const [tareas, setTareas] = useState([]);
-
-  /* use state for drag and drop: */
-  const [tareas_lista, setLista] = useState([tareas]);
 
   // Add Task:
   const agregarTarea = (tarea) => {

@@ -1,89 +1,64 @@
-import React, { useRef } from 'react';
-import styles from './LandingPage.module.css';
-import logo from '../../Assets/logo.png';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getHomeAll } from '../../Redux/actions';
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Text,
-  Divider,
-  Center,
-} from '@chakra-ui/react';
-import phone from '../../Assets/phone.jpg';
-import tablet from '../../Assets/tablet.png';
-import computer from '../../Assets/computer.png';
-import Pricing from '../UserData/Register/Pricing.jsx';
-import Footer from '../Home/Chakra UI Components/Footer';
-import { color } from '../globalStyles';
+import React from 'react';
+import style from '../hojas-de-estilo/NavBar.module.css';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Link as RouteLink, useNavigate } from 'react-router-dom';
 
-export default function LandingPage() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
-
-  useEffect(() => {
-    dispatch(getHomeAll());
-    if (user) {
-      navigate('/home');
-    }
-  }, [dispatch]);
-
-  let refMenuBtn = useRef();
-  let list = useRef();
-  let refCloseBtn = useRef();
-
-  const handleToggleMenu = (e) => {
-    if (refMenuBtn.current.id === '5') {
-      refMenuBtn.current.id = refCloseBtn.current.id;
-      list.current.style.display = 'flex';
-    } else {
-      refMenuBtn.current.id = '5';
-      list.current.style.display = 'none';
-    }
-  };
-
+function NavBar() {
   return (
-    <Box className={styles.background}>
-      <Flex className={styles.nav}>
-        <Image
-          boxSize={{ base: '120px', sm: '150px' }}
-          className={styles.logo}
-          src={logo}
-          alt="logo"
-        />
-        <Box className={styles.list} ref={list}>
-          <Text marginBottom={'20px'} className={styles.sign}>
-            <Link to={'/register/start'}>Register </Link>
-          </Text>
-          <Text className={styles.sign}>
-            <Link to={'/login/start'}>Log In </Link>
-          </Text>
-
-          <Box className={styles.nav__close}>
-            <Text
-              className={styles.close}
-              ref={refCloseBtn}
-              id={'6'}
-              onClick={handleToggleMenu}
-            >
-              Close
-            </Text>
-          </Box>
-        </Box>
-        <Box className={styles.nav__toggle}>
-          <Text
-            className={styles.menu}
-            ref={refMenuBtn}
-            id={'5'}
-            onClick={handleToggleMenu}
+    <Navbar
+      id="navbar"
+      collapseOnSelect
+      expand="lg"
+      variant="dark"
+      className={`
+      navbar
+      fixed-top
+      ${style.navbar_container}`}
+    >
+      <Container
+        color="white"
+        style={{
+          marginLeft: '5%',
+          width: '100%',
+        }}
+      >
+        <Nav>
+          <Nav.Link
+            className="nav-link"
+            style={{
+              color: 'white',
+              marginLeft: '15px',
+            }}
+            href="#logIn"
           >
-            Menu
-          </Text>
-        </Box>
-      </Flex>
-    
+            <RouteLink
+              to="/register"
+              style={{
+                color: 'white',
+                textDecoration: 'none',
+              }}
+            >
+              Register
+            </RouteLink>
+          </Nav.Link>
+          <Nav.Link
+            className="nav-link "
+            style={{ color: 'white', marginLeft: '15px' }}
+          >
+            <RouteLink
+              to="/log-in"
+              style={{
+                color: 'white',
+                textDecoration: 'none',
+              }}
+            >
+              Log In
+            </RouteLink>
+          </Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
+  );
+}
+
+export default NavBar;
