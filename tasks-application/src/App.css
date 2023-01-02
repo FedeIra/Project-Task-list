@@ -12,10 +12,21 @@ body {
   margin-top: 40px;
 }
 
+.App {
+  font-family: 'Roboto', sans-serif;
+  min-height: 70vh;
+}
+
+@media screen and (min-width: 320px) and (max-width: 1840px) {
+  .App {
+    min-height: 75vh;
+  }
+}
+
 h1 {
   color: #1b1b32;
   font-size: 25px;
-  font-family: calibri, sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   margin: 20px 0;
 }
@@ -25,6 +36,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  height: auto;
 }
 
 /* Logo de freecodecamp */
