@@ -50,6 +50,7 @@ function TareaFormulario(props) {
           <input
             className="tarea-input"
             type="text"
+            autocomplete="off"
             placeholder="Insert new task"
             name="texto"
             value={input}
